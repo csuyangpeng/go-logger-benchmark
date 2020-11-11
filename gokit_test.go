@@ -2,7 +2,7 @@ package bench
 
 import (
 	"io/ioutil"
-	"os"
+	// "os"
 	"testing"
 
 	"github.com/go-kit/kit/log"
@@ -49,19 +49,19 @@ func BenchmarkGokitTextFile(b *testing.B) {
 	})
 }
 
-func BenchmarkGokitTextStd(b *testing.B) {
-	logger := log.With(log.NewLogfmtLogger(log.NewSyncWriter(os.Stderr)))
+// func BenchmarkGokitTextStd(b *testing.B) {
+// 	logger := log.With(log.NewLogfmtLogger(log.NewSyncWriter(os.Stderr)))
 
-	lvllog := newLeveledLogger(logger, true)
+// 	lvllog := newLeveledLogger(logger, true)
 
-	b.ResetTimer()
+// 	b.ResetTimer()
 
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog")
-		}
-	})
-}
+// 	b.RunParallel(func(pb *testing.PB) {
+// 		for pb.Next() {
+// 			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog")
+// 		}
+// 	})
+// }
 
 func BenchmarkGokitJSONFile(b *testing.B) {
 	tmpfile, err := ioutil.TempFile("", "benchmark-gokit")
@@ -81,15 +81,15 @@ func BenchmarkGokitJSONFile(b *testing.B) {
 	})
 }
 
-func BenchmarkGokitJSONStd(b *testing.B) {
-	logger := log.With(log.NewLogfmtLogger(log.NewSyncWriter(os.Stderr)))
-	lvllog := newLeveledLogger(logger, true)
+// func BenchmarkGokitJSONStd(b *testing.B) {
+// 	logger := log.With(log.NewLogfmtLogger(log.NewSyncWriter(os.Stderr)))
+// 	lvllog := newLeveledLogger(logger, true)
 
-	b.ResetTimer()
+// 	b.ResetTimer()
 
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
-		}
-	})
-}
+// 	b.RunParallel(func(pb *testing.PB) {
+// 		for pb.Next() {
+// 			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
+// 		}
+// 	})
+// }
